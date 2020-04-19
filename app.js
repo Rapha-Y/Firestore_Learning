@@ -1,4 +1,5 @@
 const jobList = document.querySelector("#job-list");
+const form = document.querySelector("#add-job-form");
 
 function renderCafe(doc) {
     let li = document.createElement('li');
@@ -15,8 +16,20 @@ function renderCafe(doc) {
     jobList.appendChild(li);
 }
 
+//gets data
 db.collection("jobs").get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
         renderCafe(doc);
     });
 })
+
+//saves data
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    db.collection("jobs").add({
+        name: form.name.value,
+        city: form.city.value
+    });
+    form.name.value = "";
+    form.city.value = "";
+});
