@@ -1,0 +1,1 @@
+Small project to properly learn how to store and query data with Firestore. Following https://tinyurl.com/y9xe9etz
