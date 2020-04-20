@@ -55,3 +55,17 @@ db.collection("jobs").orderBy("name").onSnapshot(snapshot => {
         }
     });
 });
+
+//updates data
+/*
+db.collection("jobs").doc("tbvFzKAq9AIuFH449HM3").update({
+    name: "Healer"
+});
+*/
+
+//overwrites data
+/*
+db.collection("jobs").doc("tbvFzKAq9AIuFH449HM3").set({
+    name: "Healer"
+});
+*/
