@@ -26,11 +26,11 @@ function renderCafe(doc) {
 }
 
 //gets data
-db.collection("jobs").where("city", "==", "Prontera").orderBy("name").get().then((snapshot) => {
+/*db.collection("jobs").where("city", "==", "Prontera").orderBy("name").get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
         renderCafe(doc);
     });
-})
+})*/
 
 //saves data
 form.addEventListener("submit", (e) => {
@@ -41,4 +41,17 @@ form.addEventListener("submit", (e) => {
     });
     form.name.value = "";
     form.city.value = "";
+});
+
+//real-time listener
+db.collection("jobs").orderBy("name").onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+        if(change.type == "added") {
+            renderCafe(change.doc);
+        } else if (change.type == "removed") {
+            let li = jobList.querySelector("[data-id=" + change.doc.id + "]");
+            jobList.removeChild(li);
+        }
+    });
 });
