@@ -26,7 +26,7 @@ function renderCafe(doc) {
 }
 
 //gets data
-db.collection("jobs").get().then((snapshot) => {
+db.collection("jobs").where("city", "==", "Geffen").get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
         renderCafe(doc);
     });
